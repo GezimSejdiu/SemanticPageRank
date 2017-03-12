@@ -1,0 +1,11 @@
+# NetBeans specific
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+logs/
+nbactions.xml
+nb-configuration.xml
+#java specific
+*.class

@@ -1,0 +1,488 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<!DOCTYPE owl [
+  <!-- namespace URIs -->
+  <!ENTITY owl "http://www.w3.org/2002/07/owl#">
+  <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#">
+  <!ENTITY xsd "http://www.w3.org/2000/10/XMLSchema#">
+  <!ENTITY dc "http://purl.org/dc/elements/1.1/">
+  <!ENTITY dct "http://purl.org/dc/terms/">
+  <!ENTITY support "http://www.aktors.org/ontology/support#">
+  <!ENTITY portal "http://www.aktors.org/ontology/portal#">
+  <!ENTITY extbase "http://www.aktors.org/ontology/extension">
+  <!ENTITY base "http://www.aktors.org/ontology/portal">
+  <!-- resource URI prefixes -->
+  <!ENTITY epsrc 'http://www.epsrc.ac.uk/#'>
+  <!ENTITY rae 'http://www.hero.ac.uk/rae/#'>
+  <!ENTITY hesa 'http://www.hesa.ac.uk/#'>
+]>
+<rdf:RDF xmlns:owl="&owl;"
+         xmlns:rdf="&rdf;"
+         xmlns:rdfs="&rdfs;"
+	 xmlns:dc="&dc;"
+	 xmlns:dct="&dct;"
+         xmlns:xsd="&xsd;"
+	 xmlns:support="&support;"
+	 xmlns:portal="&portal;"
+         xml:base="&base;">
+
+  <owl:Ontology rdf:about="&extbase;">
+    <rdfs:label>AKT Reference Ontology (Extensions)</rdfs:label>
+    <dc:title xml:lang="en">AKT Reference Ontology (Extensions)</dc:title>
+    <dc:description xml:lang="en">This ontology contains extensions to the AKT Reference Ontology.</dc:description>
+    <dc:creator>AKT Project</dc:creator>
+    <dc:creator>Nick Gibbins</dc:creator>
+    <dct:created>2003-03-03</dct:created>
+    <dc:source rdf:resource="http://d3e.open.ac.uk/akt/2002/ref-onto.html"/>
+    <rdfs:seeAlso rdf:resource="http://d3e.open.ac.uk/akt/2002/ref-onto.html"/>
+    <owl:versionInfo>0.1</owl:versionInfo>
+    <owl:imports rdf:resource="&base;"/>
+  </owl:Ontology>
+
+  <!-- additions to take account of currency symbols -->
+
+  <owl:DatatypeProperty rdf:about="#has-iso4217-code">
+    <rdfs:label>has ISO4217 code</rdfs:label>
+    <rdfs:comment>The value of this property is a three letter currency code as specified in ISO4217. Examples include USD (United States Dollar), GBP (United Kingdom Pound) and EUR (Euro).</rdfs:comment>
+    <rdfs:domain rdf:resource="#Currency"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:subPropertyOf rdf:resource="&support;has-pretty-name"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:DatatypeProperty>
+    
+  <owl:DatatypeProperty rdf:about="#has-currency-symbol">
+    <rdfs:label>has currency symbol</rdfs:label>
+    <rdfs:comment>The value of this property is the symbol used to represent a currency, encoded as an XML character entity where necessary. Examples include $ (United States Dollar), &#163; (United Kingdom Pound) and &#8364; (Euro).</rdfs:comment>
+    <rdfs:domain rdf:resource="#Currency"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:subPropertyOf rdf:resource="&support;has-pretty-name"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:DatatypeProperty>
+
+  <!-- common currencies -->
+
+  <portal:Currency rdf:about="#gbp">
+    <portal:has-iso4217-code rdf:datatype="&xsd;string">GBP</portal:has-iso4217-code>
+    <portal:has-currency-symbol rdf:datatype="&xsd;string">&#163;</portal:has-currency-symbol>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:Currency>
+
+  <portal:Currency rdf:about="#usd">
+    <portal:has-iso4217-code rdf:datatype="&xsd;string">USD</portal:has-iso4217-code>
+    <portal:has-currency-symbol rdf:datatype="&xsd;string">$</portal:has-currency-symbol>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:Currency>
+
+  <portal:Currency rdf:about="#eur">
+    <portal:has-iso4217-code rdf:datatype="&xsd;string">EUR</portal:has-iso4217-code>
+    <portal:has-currency-symbol rdf:datatype="&xsd;string">&#8364;</portal:has-currency-symbol>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:Currency>
+
+  <!-- additions to take account of grant amounts -->
+
+  <owl:ObjectProperty rdf:about="#has-funding">
+    <rdfs:label>has funding</rdfs:label>
+    <rdfs:comment>Associates a project with a funding instance.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Project"/>
+    <rdfs:range rdf:resource="#Funding"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:Class rdf:about="#Funding">
+    <rdfs:label>Funding</rdfs:label>
+    <rdfs:comment>An instance of funding or financial support for a
+	project, a single grant or award.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&support;Intangible-Thing"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:Class>
+
+  <owl:ObjectProperty rdf:about="#has-funding-source">
+    <rdfs:label>has funding source</rdfs:label>
+    <rdfs:comment>Identifies the organization or organizations which provide a given instance of financial support.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Funding"/>
+    <rdfs:range rdf:resource="#Organization"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#has-grant-value">
+    <rdfs:label>has grant value</rdfs:label>
+    <rdfs:comment>The monetary value of an instance of funding or financial support.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Funding"/>
+    <rdfs:range rdf:resource="#Amount-Of-Money"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:DatatypeProperty rdf:about="#has-grant-reference">
+    <rdfs:label>has grant reference</rdfs:label>
+    <rdfs:comment>The name, code or grant number used by the awarding body to identify an instance of funding or financial support.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Funding"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:DatatypeProperty>
+
+  <!-- additions for technologies -->
+
+  <owl:ObjectProperty rdf:about="#has-relevant-document">
+    <rdfs:label>has relevant document</rdfs:label>
+    <rdfs:comment>Relates a technology to a document which describes it.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Technology"/>
+    <rdfs:range rdf:resource="#Publication-Reference"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#has-key-document">
+    <rdfs:label>has key document</rdfs:label>
+    <rdfs:comment>Relates a technology to the document which is considered to give the canonical description of it.</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="#has-relevant-document"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <!-- additions for RAE ratings -->
+
+  <owl:ObjectProperty rdf:about="#has-research-rating">
+    <rdfs:label>has research rating</rdfs:label>
+    <rdfs:comment>Associates an HE organization with the research
+	ratings it has received as part of the UK HE Rsearch Assessment Exercise (RAE).</rdfs:comment>
+    <rdfs:domain rdf:resource="#Higher-Educational-Organization"/>
+    <rdfs:range rdf:resource="#RAE-Rating"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#contributes-to-rating">
+    <rdfs:label>contributes to rating</rdfs:label>
+    <rdfs:comment>A research group, department or other organizational arrangement within a HE institution may have contributed towards that institutions' research rating for a given unit of assessment.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Educational-Organization-Unit"/>
+    <rdfs:range rdf:resource="#RAE-Rating"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:Class rdf:about="#RAE-Rating">
+    <rdfs:label>RAE Rating</rdfs:label>
+    <rdfs:comment>A rating received in the UK HE Research Assessment Exercise.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&support;Intangible-Thing"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#has-research-quality"/>
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#has-staff-proportion"/>
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#has-unit-of-assessment"/>
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#has-date-of-assessment"/>
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <owl:ObjectProperty rdf:about="#has-research-quality">
+    <rdfs:label>has research quality</rdfs:label>
+    <rdfs:comment>Indicates the rating of research quality that was awarded (currently a seven point scale: 1, 2, 3a, 3b, 4, 5 and 5*).</rdfs:comment>
+    <rdfs:domain rdf:resource="#RAE-Rating"/>
+    <rdfs:range rdf:resource="#RAE-Research-Quality"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#has-staff-proportion">
+    <rdfs:label>has staff proportion</rdfs:label>
+    <rdfs:comment>Indicates the proportion of staff who were submitted in the Research Assessment Exercise as one of five bands (A to E).</rdfs:comment>
+    <rdfs:domain rdf:resource="#RAE-Rating"/>
+    <rdfs:range rdf:resource="#RAE-Staff-Proportion"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#has-unit-of-assessment">
+    <rdfs:label>has unit of assessment</rdfs:label>
+    <rdfs:comment>Indicates the unit of assessment (subject discipline) for which this rating applies.</rdfs:comment>
+    <rdfs:domain rdf:resource="#RAE-Rating"/>
+    <rdfs:range rdf:resource="&hesa;Unit-Of-Assessment"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#has-date-of-assessment">
+    <rdfs:label>has date of assessment</rdfs:label>
+    <rdfs:comment>Indicates the date that this rating was issued.</rdfs:comment>
+    <rdfs:domain rdf:resource="#RAE-Rating"/>
+    <rdfs:range rdf:resource="&support;Calendar-Date"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:Class rdf:about="#RAE-Research-Quality">
+    <rdfs:label>RAE Research Quality</rdfs:label>
+    <rdfs:comment>Ratings of research quality are expressed in terms of a standard scale with common definitions of the points. The descriptors of the points on the rating scale were reviewed and amended for the 2001 RAE.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&support;Intangible-Thing"/>
+    <owl:oneOf rdf:parseType="Collection">
+      <portal:RAE-Research-Quality rdf:about="#rae-5*"/>
+      <portal:RAE-Research-Quality rdf:about="#rae-5"/>
+      <portal:RAE-Research-Quality rdf:about="#rae-4"/>
+      <portal:RAE-Research-Quality rdf:about="#rae-3a"/>
+      <portal:RAE-Research-Quality rdf:about="#rae-3b"/>
+      <portal:RAE-Research-Quality rdf:about="#rae-2"/>
+      <portal:RAE-Research-Quality rdf:about="#rae-1"/>
+    </owl:oneOf>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:Class>  
+
+  <portal:RAE-Research-Quality rdf:about="#rae-5*">
+    <rdfs:label>5*</rdfs:label>
+    <rdfs:comment>Quality that equates to attainable levels of international excellence in more than half of the research activity submitted and attainable levels of national excellence in the remainder.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Research-Quality>
+
+  <portal:RAE-Research-Quality rdf:about="#rae-5">
+    <rdfs:label>5</rdfs:label>
+    <rdfs:comment>Quality that equates to attainable levels of international excellence in up to half of the research activity submitted and to attainable levels of national excellence in virtually all of the remainder.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Research-Quality>
+
+  <portal:RAE-Research-Quality rdf:about="#rae-4">
+    <rdfs:label>4</rdfs:label>
+    <rdfs:comment>Quality that equates to attainable levels of national excellence in virtually all of the research activity submitted, showing some evidence of international excellence.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Research-Quality>
+
+  <portal:RAE-Research-Quality rdf:about="#rae-3a">
+    <rdfs:label>3a</rdfs:label>
+    <rdfs:comment>Quality that equates to attainable levels of national excellence in over two-thirds of the research activity submitted, possibly showing evidence of international excellence.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Research-Quality>
+
+  <portal:RAE-Research-Quality rdf:about="#rae-3b">
+    <rdfs:label>3b</rdfs:label>
+    <rdfs:comment>Quality that equates to attainable levels of national excellence in more than half of the research activity submitted.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Research-Quality>
+
+  <portal:RAE-Research-Quality rdf:about="#rae-2">
+    <rdfs:label>2</rdfs:label>
+    <rdfs:comment>Quality that equates to attainable levels of national excellence in up to half of the research activity submitted.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Research-Quality>
+
+  <portal:RAE-Research-Quality rdf:about="#rae-1">
+    <rdfs:label>1</rdfs:label>
+    <rdfs:comment>Quality that equates to attainable levels of national excellence in none, or virtually none, of the research activity submitted.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Research-Quality>
+
+  <owl:Class rdf:about="#RAE-Staff-Proportion">
+    <rdfs:label>RAE Staff Proportion</rdfs:label>
+    <rdfs:comment>The published RAE results contain three elements: grade, full-time equivalent (FTE) number of Category A and A* staff submitted, and proportion of staff submitted (A plus A*) as research-active. This last indicator takes the form of a letter denoting a band.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&support;Intangible-Thing"/>
+    <owl:oneOf rdf:parseType="Collection">
+      <portal:RAE-Staff-Proportion rdf:about="#rae-A"/>
+      <portal:RAE-Staff-Proportion rdf:about="#rae-B"/>
+      <portal:RAE-Staff-Proportion rdf:about="#rae-C"/>
+      <portal:RAE-Staff-Proportion rdf:about="#rae-D"/>
+      <portal:RAE-Staff-Proportion rdf:about="#rae-E"/>
+      <portal:RAE-Staff-Proportion rdf:about="#rae-F"/>
+    </owl:oneOf>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:Class>  
+
+  <portal:RAE-Staff-Proportion rdf:about="#rae-A">
+    <rdfs:label>A</rdfs:label>
+    <rdfs:comment>95-100 per cent of staff submitted.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Staff-Proportion>
+
+  <portal:RAE-Staff-Proportion rdf:about="#rae-B">
+    <rdfs:label>B</rdfs:label>
+    <rdfs:comment>80-94.9 per cent of staff submitted.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Staff-Proportion>
+
+  <portal:RAE-Staff-Proportion rdf:about="#rae-C">
+    <rdfs:label>C</rdfs:label>
+    <rdfs:comment>60-79.9 per cent of staff submitted.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Staff-Proportion>
+
+  <portal:RAE-Staff-Proportion rdf:about="#rae-D">
+    <rdfs:label>D</rdfs:label>
+    <rdfs:comment>40-59.9 per cent of staff submitted.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Staff-Proportion>
+
+  <portal:RAE-Staff-Proportion rdf:about="#rae-E">
+    <rdfs:label>E</rdfs:label>
+    <rdfs:comment>20-39.9 per cent of staff submitted.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Staff-Proportion>
+
+  <portal:RAE-Staff-Proportion rdf:about="#rae-F">
+    <rdfs:label>F</rdfs:label>
+    <rdfs:comment>Below 20 per cent of staff submitted.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </portal:RAE-Staff-Proportion>
+
+  <!-- additions for journal impact factors-->
+
+  <owl:DatatypeProperty rdf:about="#has-impact-factor">
+    <rdfs:label>has impact factor</rdfs:label>
+    <rdfs:comment>Journals and other types of publication may have impact factors which are used in citation impact analysis.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Publication"/>
+    <rdfs:range rdf:resource="&xsd;decimal"/>    
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:DatatypeProperty>
+
+  <!-- additions for geographical locations with lat/long coordinates -->
+
+  <owl:Class rdf:about="#Coordinate-Location">
+    <rdfs:label>Coordinate Location</rdfs:label>
+    <rdfs:comment>A location with latitude/longitude coordinates
+	expressed relative to some datum. If no datum is specified,
+	the coordinates are assumed to be relative to
+	WGS84.</rdfs:comment> 
+    <rdfs:subClassOf rdf:resource="#Location"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#has-latitude"/>
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#has-longitude"/>
+        <owl:cardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#has-datum"/>
+        <owl:maxCardinality rdf:datatype="&xsd;nonNegativeInteger">1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:Class>
+
+  <owl:DatatypeProperty rdf:about="#has-latitude">
+    <rdfs:label>has latitude</rdfs:label>
+    <rdfs:comment>The latitude of a point expressed in decimal degrees
+      north of the equator. Latitudes south of the equator are
+      expressed as negative numbers. Latitudes are not be expressed
+      as degrees, minutes and seconds.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Coordinate-Location"/>
+    <rdfs:range rdf:resource="&xsd;decimal"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#has-longitude">
+    <rdfs:label>has longitude</rdfs:label>
+    <rdfs:comment>The longitude of a point expressed in decimal degrees
+      east of the prime meridian. Longitudes west of the prime
+      meridian are expressed as negative numbers. Longitudes are not
+      be expressed as degrees, minutes and seconds.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Coordinate-Location"/>
+    <rdfs:range rdf:resource="&xsd;decimal"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:DatatypeProperty>
+
+  <owl:ObjectProperty rdf:about="#has-datum">
+    <rdfs:label>has label</rdfs:label>
+    <rdfs:comment>The datum relative to which the latitude and
+      longitude of a point are expressed.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Coordinate-Location"/>
+    <rdfs:range rdf:resource="#Datum"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:Class rdf:about="#Datum">
+    <rdfs:label>Datum</rdfs:label>
+    <rdfs:comment>A datum used to define a reference system, eg. World
+      Geodetic System 1984, Ordnance Survey of Great Britain Datum
+      1936, etc.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="&support;Intangible-Thing"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:Class>
+
+  <portal:Datum rdf:about="#WGS84">
+    <support:has-pretty-name>World Geodetic System 1984</support:has-pretty-name>
+  </portal:Datum>
+
+  <!-- additions for publications --> 
+
+  <owl:DatatypeProperty rdf:about="#has-abstract">
+    <rdfs:label>has abstract</rdfs:label>
+    <rdfs:domain rdf:resource="#Publication-Reference"/>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:subPropertyOf rdf:resource="#has-summary"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#has-summary">
+    <rdfs:label>has summary</rdfs:label>
+    <rdfs:range rdf:resource="&xsd;string"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#has-impact-factor">
+    <rdfs:label>has impact factor</rdfs:label>
+    <rdfs:comment>Indicates that a publication has the given impact factor.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Journal"/>
+    <rdfs:range rdf:resource="&xsd;decimal"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:DatatypeProperty>
+
+  <!-- additions for projects -->
+
+  <owl:ObjectProperty rdf:about="#contributes-to">
+    <rdfs:label>contributes to</rdfs:label>
+    <rdfs:comment>Activities may contribute to (the production of) things, even if they are not the sole agent of production. For example, a project may be a contributor to a technology, but may not have produced the technology by itself.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Activity"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#produces-output">
+    <rdfs:subPropertyOf rdf:resource="#contributes-to"/>
+  </owl:ObjectProperty>
+
+  <owl:Class rdf:about="#Project">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="#contributes-to"/>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#Event"/>
+              <owl:Class rdf:about="#Technology"/>
+              <owl:Class rdf:about="#Method"/>
+              <owl:Class rdf:about="#Organization"/>
+              <owl:Class rdf:about="#Information-Bearing-Object"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <!-- additions for people -->
+
+  <owl:ObjectProperty rdf:about="#has-secretary">
+    <rdfs:label>has secretary</rdfs:label>
+    <rdfs:domain rdf:resource="#Person"/>
+    <rdfs:range rdf:resource="#Secretary"/>
+    <owl:inverseOf rdf:resource="#is-secretary-of"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#is-secretary-of">
+    <rdfs:label>is secretary of</rdfs:label>
+    <rdfs:domain rdf:resource="#Secretary"/>
+    <rdfs:range rdf:resource="#Person"/>
+    <owl:inverseOf rdf:resource="#has-secretary"/>
+    <rdfs:isDefinedBy rdf:resource="&extbase;"/>
+  </owl:ObjectProperty>
+</rdf:RDF>    

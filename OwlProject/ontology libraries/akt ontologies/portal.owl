@@ -1,0 +1,2391 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:support="http://www.aktors.org/ontology/support#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:portal="http://www.aktors.org/ontology/portal#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://www.aktors.org/ontology/portal">
+  <owl:Ontology rdf:about="">
+    <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2.0</owl:versionInfo>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >AKT Reference Ontology (Portal Ontology)</rdfs:label>
+    <owl:imports rdf:resource="http://www.aktors.org/ontology/support"/>
+    <dc:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Enrico Motta (OCML version)</dc:creator>
+    <dc:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Nick Gibbins (OWL translation)</dc:creator>
+    <dc:title xml:lang="en">AKT Reference Ontology (Portal Ontology)</dc:title>
+    <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >2003-02-10</dct:created>
+    <dc:creator rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >AKT Project</dc:creator>
+    <dc:description xml:lang="en">The AKT Reference Ontology has been designed to support the AKT-2 demonstrator ("AKTive Portal"), and subsequent activities. The ontology, designed by the AKT-2 group and codified by Enrico Motta, extends Version 1.</dc:description>
+  </owl:Ontology>
+  <owl:Class rdf:ID="Software-Status">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Intangible-Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Distance-Teaching-University">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="University"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Technology">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Thing"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Generic-Agent"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has-author"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >By technology we mean engineered applications of science. I guess we are probably confining ourselves to tangible things but as I am not sure I will use thing as the direct superclass - e.g., an algorithm is an intangible thing, but it could be seen as a technology, if we give a broad interpretation of the term</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Academic-Support-Unit">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Educational-Organization-Unit"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Postal-Address">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Address"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Modified to allow addresses to be given as strings, with no structure</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Activity">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Temporal-Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Book-Reference">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Publication-Reference"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="published-by"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Publishing-House"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Generic-Agent">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Temporal-Thing"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This is a generic notion, an agent can be an organization, a person an animal, a software agent, etc</rdfs:comment>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Generic Agent</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:ID="Amount-Of-Money">
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Physical-Quantity"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty rdf:resource="http://www.aktors.org/ontology/support#has-unit-of-measure"/>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Currency"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Country">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Geopolitical-Entity"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Non-Profit-Organization">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Organization"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Attending-A-Conference">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Attending-An-Event"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="event-attended"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Conference"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Event">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This is a minimalist definition of class event.  We start with the very basic and we will then add slots as we specialise this definition for specific classes of events. The fillers of slots has-other-agents-involved and has-main-agent should not intersect</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Temporal-Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Researcher">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Working-Person"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Recorded-Video">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Information-Bearing-Object"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Any kind of recorded video, which is tangible.  This also includes a mpeg file on a machine</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Academic-Degree">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Degree"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Project">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Activity"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#Event"/>
+              <owl:Class rdf:about="#Technology"/>
+              <owl:Class rdf:ID="Method"/>
+              <owl:Class rdf:about="#Organization"/>
+              <owl:Class rdf:about="#Information-Bearing-Object"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="produces-output"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="involves-organization"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has-project-member"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Transportation-Device">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Something tangible designed to transport people, animals, objects from A to B. For instance a bycicle, a car, a boat, etc.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Tangible-Thing"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Generalised-Means-Of-Transport"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Village">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Municipal-Unit"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Book">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Publication"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has-publication-reference"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Book-Reference"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has-publication-reference"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Geographical-Region">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >'Real' geographical regions</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Tangible-Thing"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Location"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Award">
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Intangible-Thing"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An award is an intangible thing, even if the piece of paper which is often associated with an award is tangible.  What about the virtual piece of paper in the virtual degree ceremony?  I guess that ought to be an intangible</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Article-In-A-Composite-Publication">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Publication"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Composite-Publication"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="included-in-publication"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Book-Publishing">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Publication-Type-Event"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Small-Or-Medium-Sized-Organization">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >SME are important, so we define a class to represent them explicitly. In some case we might not know or we do not want to bother specifying excatly whether something is a small-organization or a medium-organization. Hence, we can just say 'x is a SME' without going into further detail.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Organization"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has-size"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class>
+            <owl:oneOf rdf:parseType="Collection">
+              <portal:Organization-Size rdf:ID="medium-size">
+                <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >An organization with no more than 250 employees.  It also has to be independent, i.e., less than 25% owned by one enterprise (or jointly by several enterprises) falling outside the definition of medium-sized enterprise. Finally, either the turnover total must be less than 40M Euros or the balance sheet total must be less than 27M Euros.</rdfs:comment>
+                <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >medium</rdfs:label>
+                <rdfs:isDefinedBy rdf:resource=""/>
+              </portal:Organization-Size>
+              <portal:Organization-Size rdf:ID="small-size">
+                <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >small</rdfs:label>
+                <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                >An organization with no more than 50 employees.  It also has to be independent, i.e., less than 25% owned by one enterprise (or jointly by several enterprises) falling outside the definition of small-sized enterprise. Finally, either the turnover total must be less than 7M Euros or the balance sheet total must be less than 5M Euros.</rdfs:comment>
+                <rdfs:isDefinedBy rdf:resource=""/>
+              </portal:Organization-Size>
+            </owl:oneOf>
+          </owl:Class>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Small or Medium-sized Organization</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Method">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Merrian-Webster has a good set of definitions for a method. They say it is 'a systematic procedure, technique, or mode of inquiry employed by or proper to a particular discipline or art;  a systematic plan followed in presenting material for instruction; a way, technique, or process of or for doing something; a body of skills or techniques'. This is very much also what we mean by method.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Intangible-Thing"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Person"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has-author"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="owned-by"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#Organization"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Public-Company">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Company"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="University-Faculty">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Academic-Unit"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Generic-Area-Of-Interest">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A generic class to specify generic areas for research or business initiatives. For instance, the area in which a project is situated</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Intangible-Thing"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Civil-Service">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Government-Organization"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Hardware-Technology">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Computing-Technology"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Generalised-Means-Of-Transport">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This is a generic class to catch all sorts of borderline and metaphorical ways to carry things from A to B</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Thing"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Degree">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A degree is type of award</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Award"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Multimedia-Designer">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Employee"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Educational-Employee">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Employee"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="works-for"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Educational-Organization"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#works-for"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Daily-Newspaper">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Newspaper"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has-periodicity"/>
+        </owl:onProperty>
+        <owl:hasValue rdf:resource="http://www.aktors.org/ontology/support#twentyfour-hour-duration"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Scripting-Language">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Specification-Or-Computing-Language"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Project-Officer-In-Academia">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Academic-Support-Staff"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Workshop">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Meeting-Taking-Place"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Publication-Type-Event"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="published-proceedings"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Workshop-Proceedings-Reference"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Reader-In-Academia">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Academic"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Local-District">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Geopolitical-Entity"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Address">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A generic class for addresses, whether email or postal. We see an address as abstract information and therefore it is an intangible thing</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Abstract-Information"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Abstract-Information">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Information in general, independent of an object in which it is encoded. Whatever is transferred in an information-transfer event. It is clearly an intangible thing</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Intangible-Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="News-Item">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Article-In-A-Composite-Publication"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Research-Fellow-In-Academia">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Researcher-In-Academia"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Conference-Proceedings-Reference">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Publication-Reference"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Hardware-Platform">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Hardware-Technology"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Senior-Lecturer-In-Academia">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Academic"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Publication">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A publication is something which has one or more publication references. A publication can be both an article in a journal or a journal itself. The distinction between publication and publication-reference makes it possible to distinguish between multiple occurrences of the sam publication, for instance in different media</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Information-Bearing-Object"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has-publication-reference"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#Publication-Reference"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has-publication-reference"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#Publication-Reference"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="cites-publication-reference"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Publication-Type-Event">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Event-Involving-Production"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#Publication"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="event-product"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Graphic-Designer">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Employee"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Book-Section-Reference">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Publication-Reference"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Educational-Organization">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Learning-Centred-Organization"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Higher-Educational-Organization">
+    <rdfs:subClassOf rdf:resource="#Educational-Organization"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Programming-Language">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Specification-Or-Computing-Language"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Attending-An-Event">
+    <rdfs:subClassOf rdf:resource="#Event"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Meeting-Taking-Place">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A meeting type of event. Note that both attendee and organizer have multiple cardinality</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Social-Gathering"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Researcher-In-Academia">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Academic"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Researcher"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Lecturer-In-Academia">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Academic"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Operating-System">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Implemented-System"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Private-Company">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Company"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Proceedings-Paper-Reference">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Publication-Reference"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Publishing-House">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Organization"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Giving-A-Talk">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Information-Transfer-Event"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Geopolitical-Entity">
+    <rdfs:subClassOf rdf:resource="#Geographical-Region"/>
+    <rdfs:subClassOf rdf:resource="#Generic-Agent"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A geopolitical entity is a geographical area which is associated with some sort of political structure. For instance, Russia, Italy, The-city-of-Messina, etc. A geopolitical entity can be also seen as an agent - e.g., France declared war to Spain</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Web-Based-Editor">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Editor"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Web-Based-System">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A system which is accessible through the web</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Implemented-System"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Business-Area">
+    <rdfs:subClassOf rdf:resource="#Generic-Area-Of-Interest"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Event-Involving-Production">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >When something is produced</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Event"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Implemented-System">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Software-Technology"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Web-Reference">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Publication-Reference"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Serial-Publication">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This used to be called periodical publication.  However, many periodicals do not appear at fixed intervals, which is why librarians refer to them as serials. So, we now use the concept of serial publication and the has-periodicity slot has been removed</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Publication"/>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:ID="Journal"/>
+          <owl:Class rdf:ID="Magazine"/>
+          <owl:Class rdf:about="#Newspaper"/>
+        </owl:unionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:ID="Senior-Research-Fellow-In-Academia">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Researcher-In-Academia"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Political-Organization">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Organization"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An organization which has a political connotation</rdfs:comment>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Political Organization</rdfs:label>
+  </owl:Class>
+  <owl:Class rdf:about="#Specification-Or-Computing-Language">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Software-Technology"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Capital-City">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="City"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Organization-Unit">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An organization may have a number of units. Units may themselves have sub-units</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Generic-Agent"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Profit-Organization">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Organization"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Government-Organization">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Non-Profit-Organization"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Newspaper">
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Journal"/>
+    </owl:disjointWith>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Magazine"/>
+    </owl:disjointWith>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Periodical-Publication"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Composite-Publication"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#News-Item"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="contains-news-item"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Work-Status">
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Intangible-Thing"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:oneOf rdf:parseType="Collection">
+          <portal:Work-Status rdf:ID="Full-Time">
+            <rdfs:isDefinedBy rdf:resource=""/>
+          </portal:Work-Status>
+          <portal:Work-Status rdf:ID="Part-Time">
+            <rdfs:isDefinedBy rdf:resource=""/>
+          </portal:Work-Status>
+        </owl:oneOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="#Computing-Technology">
+    <rdfs:subClassOf rdf:resource="#Technology"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Secretary">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Employee"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Employee">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Working-Person"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Affiliated-Person"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="R-And-D-Institute">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Learning-Centred-Organization"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Awarding-Body">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Legal-Agent"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Legal agents can be either organizations or people. An awarding body is normally an organization, an individual, or a bunch of people</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Email-Message">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Message"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Municipal-Unit">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Geopolitical-Entity"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Charitable-Organization">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Non-Profit-Organization"/>
+  </owl:Class>
+  <owl:Class rdf:ID="System-Administrator">
+    <rdfs:subClassOf rdf:resource="#Employee"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Edited-Book">
+    <rdfs:subClassOf rdf:resource="#Publication"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Edited-Book-Reference"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has-publication-reference"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has-publication-reference"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Technical-Report-Reference">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Publication-Reference"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Recorded-Audio">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Information-Bearing-Object"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Any kind of recorded audio, which is tangible.  This also includes a audio file on a machine</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#Legal-Agent">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Some agents have legal status: definitely organizations and people, anybody else?</rdfs:comment>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Legal Agent</rdfs:label>
+    <rdfs:subClassOf rdf:resource="#Generic-Agent"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Editor">
+    <rdfs:subClassOf rdf:resource="#Implemented-System"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Magazine">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <owl:disjointWith>
+      <owl:Class rdf:about="#Journal"/>
+    </owl:disjointWith>
+    <owl:disjointWith rdf:resource="#Newspaper"/>
+    <rdfs:subClassOf rdf:resource="#Serial-Publication"/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Composite-Publication"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="contains-article"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Publication"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Organization">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#Affiliated-Person"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="headed-by"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An organization is a type of legal agent</rdfs:comment>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Organization</rdfs:label>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has-sub-unit"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Organization-Unit"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has-size"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#Organization"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="organization-part-of"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Legal-Agent"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has-size"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:ID="Organization-Size"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#Affiliated-Person"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="affiliated-person"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Organization-Size">
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Intangible-Thing"/>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:oneOf rdf:parseType="Collection">
+          <portal:Organization-Size rdf:ID="very-large-size">
+            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >very large</rdfs:label>
+            <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >An organization with over 10000 employees</rdfs:comment>
+            <rdfs:isDefinedBy rdf:resource=""/>
+          </portal:Organization-Size>
+          <portal:Organization-Size rdf:ID="large-size">
+            <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >An organization with more than 250 employees</rdfs:comment>
+            <rdfs:isDefinedBy rdf:resource=""/>
+            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >large</rdfs:label>
+          </portal:Organization-Size>
+          <portal:Organization-Size rdf:about="#medium-size"/>
+          <portal:Organization-Size rdf:about="#small-size"/>
+          <portal:Organization-Size rdf:ID="micro-size">
+            <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >micro</rdfs:label>
+            <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >An organization with no more than 10 employees.  It also has to be independent, i.e., less than 25% owned by one enterprise (or jointly by several enterprises) falling outside the definition of micro-sized enterprise.</rdfs:comment>
+            <rdfs:isDefinedBy rdf:resource=""/>
+          </portal:Organization-Size>
+        </owl:oneOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Organization Size</rdfs:label>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >We use EU guidelines to distinguish between different organization sizes</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#Software-Technology">
+    <rdfs:subClassOf rdf:resource="#Computing-Technology"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Letter">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Message"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Person">
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Tangible-Thing"/>
+    <rdfs:subClassOf rdf:resource="#Legal-Agent"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="School">
+    <rdfs:subClassOf rdf:resource="#Educational-Organization"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Workshop-Proceedings-Reference">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Publication-Reference"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Gender">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >HPKB says that genders are intangible..Uhm...</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:oneOf rdf:parseType="Collection">
+          <portal:Gender rdf:ID="Male-Gender">
+            <rdfs:isDefinedBy rdf:resource=""/>
+          </portal:Gender>
+          <portal:Gender rdf:ID="Female-Gender">
+            <rdfs:isDefinedBy rdf:resource=""/>
+          </portal:Gender>
+        </owl:oneOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Intangible-Thing"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Partnership">
+    <rdfs:subClassOf rdf:resource="#Profit-Organization"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A partnership is not necessarily a company, e.g. a consultancy firm is not a company</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Event-Involving-Movement">
+    <rdfs:subClassOf rdf:resource="#Event"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="location-at-start"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="location-at-end"/>
+        </owl:onProperty>
+        <owl:maxCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:maxCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This is an event in which the main agent (plus maybe others) goes from some place to another</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Research-Area">
+    <rdfs:subClassOf rdf:resource="#Generic-Area-Of-Interest"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="sub-area-of"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Research-Area"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Social-Gathering">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Event"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Academic-Unit">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Educational-Organization-Unit"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#University"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="unit-of-organization"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Government">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Government-Organization"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Academic-Support-Staff">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Educational-Employee"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#Higher-Educational-Organization"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#works-for"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="R-And-D-Institute-Within-Larger-Institute">
+    <rdfs:subClassOf rdf:resource="#R-And-D-Institute"/>
+    <rdfs:subClassOf rdf:resource="#Organization-Unit"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Town">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Municipal-Unit"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Web-Browser">
+    <rdfs:subClassOf rdf:resource="#Implemented-System"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A web browser is not a web-based system!</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Currency">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Information-Bearing-Object"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Affiliated-Person">
+    <rdfs:subClassOf rdf:resource="#Person"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has-affiliation"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A person which has an affiliation with some organization. For instance employees are affiliated to the organization they work for, students to the institution where they are studying, etc. A person can have multiple affiliations, which means that there is no constraint relating the values of slot has-affiliation-to-unit to the values of slot has-affiliation</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Company">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Profit-Organization"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Information-Bearing-Object">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This notion comes from Cyc.  It is useful to group together all information bearing entities, including video, audio and documents. An information bearing object may have an author (a generic agent) and may be owned by a legal agent. It is a tangible object</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Tangible-Thing"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has-author"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Generic-Agent"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#owned-by"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Legal-Agent"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Thesis-Reference">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Publication-Reference"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Conference">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Meeting-Taking-Place"/>
+    <rdfs:subClassOf rdf:resource="#Publication-Type-Event"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#Conference-Proceedings-Reference"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#published-proceedings"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Message">
+    <rdfs:subClassOf rdf:resource="#Information-Bearing-Object"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Article-Reference">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Publication-Reference"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Location">
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Tangible-Thing"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A generic class for locations.  It includes both real and fantastic places</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="PhD-Student">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="Student"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#Higher-Educational-Organization"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="studies-at"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Publication-Reference">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >we have decided that a publication reference is an intangible, abstract information</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Abstract-Information"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has-author"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Generic-Agent"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has-date"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://www.aktors.org/ontology/support#Calendar-Date"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="has-place-of-publication"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Location"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Research-Assistant-In-Academia">
+    <rdfs:subClassOf rdf:resource="#Researcher-In-Academia"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Academic">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Educational-Employee"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#Higher-Educational-Organization"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#works-for"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Self-Employed-Person">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Working-Person"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Edited-Book-Reference">
+    <rdfs:subClassOf rdf:resource="#Book-Reference"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="edited-by"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Person"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#University">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Higher-Educational-Organization"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Composite-Publication">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A publication which contains items which cane be themselves referenced through a publication reference.  Composite publications include newspapers, magazines and journals. A book which is a collection of articles is a composite publication, a monograph is not</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="contains-publication"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Publication"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#contains-publication"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Employment-Contract-Type">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:oneOf rdf:parseType="Collection">
+          <portal:Employment-Contract-Type rdf:ID="Permanent-Contract">
+            <rdfs:isDefinedBy rdf:resource=""/>
+          </portal:Employment-Contract-Type>
+          <portal:Employment-Contract-Type rdf:ID="Temporary-Contract">
+            <rdfs:isDefinedBy rdf:resource=""/>
+          </portal:Employment-Contract-Type>
+        </owl:oneOf>
+      </owl:Class>
+    </owl:equivalentClass>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Intangible-Thing"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Journal">
+    <owl:disjointWith rdf:resource="#Magazine"/>
+    <owl:disjointWith rdf:resource="#Newspaper"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Serial-Publication"/>
+    <rdfs:subClassOf rdf:resource="#Composite-Publication"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#contains-article"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Publication"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Sending-An-Email">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Information-Transfer-Event"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="information-object-being-transferred"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Email-Message"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="information-transfer-medium-used"/>
+        </owl:onProperty>
+        <owl:hasValue>
+          <portal:Information-Transfer-Medium rdf:ID="Email-Medium">
+            <rdfs:isDefinedBy rdf:resource=""/>
+          </portal:Information-Transfer-Medium>
+        </owl:hasValue>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >a generalized transfer in which information is passed from main agent to one or more recipient agents.  examples include giving a tutorial.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Generalized-Transfer">
+    <rdfs:subClassOf rdf:resource="#Event-Involving-Movement"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An event in which the main agent transfers something (the thing-acted-on, tangible or intangible) to one or more recipient agents. Note that we do not say anything about whether the original agent still retain the thing-acted-on.  In some cases this is clearly true ('I pass my wisdom on to my daughter'), in other cases it is not (I give you my wallet).</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#City">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Municipal-Unit"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Visiting-Researcher">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Researcher"/>
+    <rdfs:subClassOf rdf:resource="#Affiliated-Person"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Periodical-Publication">
+    <rdfs:subClassOf rdf:resource="#Serial-Publication"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has-periodicity"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://www.aktors.org/ontology/support#Duration"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#has-periodicity"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >This comes from the ontolingua library. A periodical-publication is published regularly, such as once every week.  Strictly speaking, the noun 'periodical' is used by librarians to refer to things published at intervals of greater than a day.  We use the phase periodical-publication to include newspapers and other daily publications, since they share many bibliographic features. The periodicity indicates how often the publication comes out. Note that this is a duration, rather than a time interval. A time interval indicates a specific time interval on the time continuum, so we need to model periodicity as a time quantity</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Conferring-An-Award">
+    <rdfs:subClassOf rdf:resource="#Generalized-Transfer"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Student">
+    <rdfs:subClassOf rdf:resource="#Affiliated-Person"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#studies-at"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#studies-at"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Educational-Organization"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="studies-in-unit"/>
+        </owl:onProperty>
+        <owl:minCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:minCardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#studies-in-unit"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="#Educational-Organization-Unit"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Professor-In-Academia">
+    <rdfs:subClassOf rdf:resource="#Academic"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Information-Transfer-Medium">
+    <rdfs:subClassOf rdf:resource="#Generalised-Means-Of-Transport"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Educational-Organization-Unit">
+    <rdfs:subClassOf rdf:resource="#Organization-Unit"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#unit-of-organization"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Educational-Organization"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Web-Site">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Implemented-System"/>
+    <rdfs:subClassOf rdf:resource="#Information-Bearing-Object"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Information-Transfer-Event">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Generalized-Transfer"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A generalized transfer in which information is passed from main agent to one or more recipient agents.  Examples include giving a tutorial.</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Financial-Award">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Award"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Programming-Environment">
+    <rdfs:subClassOf rdf:resource="#Implemented-System"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:ID="supports-language"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#Programming-Language"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Specification-Language">
+    <rdfs:subClassOf rdf:resource="#Specification-Or-Computing-Language"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:about="#Working-Person">
+    <rdfs:subClassOf rdf:resource="#Person"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Industrial-Organization">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subClassOf rdf:resource="#Profit-Organization"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Learning-Centred-Organization">
+    <rdfs:subClassOf rdf:resource="#Organization"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:Class rdf:ID="Appellation">
+    <rdfs:subClassOf rdf:resource="http://www.aktors.org/ontology/support#Intangible-Thing"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="published-book">
+    <rdfs:range rdf:resource="#Book"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#event-product"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#Book-Publishing"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="time-of-message">
+    <rdfs:domain rdf:resource="#Message"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="http://www.aktors.org/ontology/support#Time-Point"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="runs-on-operating-system">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Implemented-System"/>
+    <rdfs:range rdf:resource="#Operating-System"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-academic-degree">
+    <rdfs:domain rdf:resource="#Person"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Academic-Degree"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="method-builds-on">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Method"/>
+    <rdfs:domain rdf:resource="#Method"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="supports-method">
+    <rdfs:range rdf:resource="#Method"/>
+    <rdfs:domain rdf:resource="#Technology"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#published-proceedings">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#event-product"/>
+    </rdfs:subPropertyOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-currency">
+    <rdfs:range rdf:resource="#Currency"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Country"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#cites-publication-reference">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-government">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Government"/>
+    <rdfs:domain rdf:resource="#Country"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="confers-award">
+    <rdfs:domain rdf:resource="#Conferring-An-Award"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Award"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="thing-acted-on"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-contract-type">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Employee"/>
+    <rdfs:range rdf:resource="#Employment-Contract-Type"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="organization-being-visited">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Organization"/>
+    <rdfs:domain rdf:resource="#Visiting-Researcher"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#has-affiliation"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#event-attended">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Event"/>
+    <rdfs:domain rdf:resource="#Attending-An-Event"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#information-transfer-medium-used">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Information-Transfer-Event"/>
+    <rdfs:range rdf:resource="#Information-Transfer-Medium"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="means-of-transport-used"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#published-by">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="meeting-attendee">
+    <rdfs:domain rdf:resource="#Meeting-Taking-Place"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="has-other-agents-involved"/>
+    </rdfs:subPropertyOf>
+    <rdfs:range rdf:resource="#Person"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#included-in-publication">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-publication-reference">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#means-of-transport-used">
+    <rdfs:range rdf:resource="#Generalised-Means-Of-Transport"/>
+    <rdfs:domain rdf:resource="#Event-Involving-Movement"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="project-involves-organization-unit">
+    <rdfs:range rdf:resource="#Organization-Unit"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >It is sufficient that somebody in unit ?u works in project ?p</rdfs:comment>
+    <rdfs:domain rdf:resource="#Project"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-sub-unit">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Organization-Unit"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="address-country">
+    <rdfs:domain rdf:resource="#Address"/>
+    <rdfs:range rdf:resource="#Country"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-appellation">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Appellation"/>
+    <rdfs:domain rdf:resource="#Person"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="requires-hardware-platform-on-server-side">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="requires-hardware-platform"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#Web-Based-System"/>
+    <rdfs:range rdf:resource="#Hardware-Platform"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-date">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#unit-of-organization">
+    <rdfs:range rdf:resource="#Organization"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-affiliation-to-unit">
+    <rdfs:domain rdf:resource="#Affiliated-Person"/>
+    <rdfs:range rdf:resource="#Organization-Unit"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="address-area">
+    <rdfs:range rdf:resource="#Local-District"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Address"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requires-hardware-platform">
+    <rdfs:domain rdf:resource="#Implemented-System"/>
+    <rdfs:range rdf:resource="#Hardware-Platform"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="address-city-or-village">
+    <rdfs:range rdf:resource="#Municipal-Unit"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Address"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#edited-by">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#has-author"/>
+    </rdfs:subPropertyOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-supervisor">
+    <rdfs:domain rdf:resource="#PhD-Student"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Person"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-ISBN-number">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-awarding-body">
+    <rdfs:range rdf:resource="#Awarding-Body"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="has-main-agent"/>
+    </rdfs:subPropertyOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Conferring-An-Award"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="recipient-agents">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#has-other-agents-involved"/>
+    </rdfs:subPropertyOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The agents which receive the thing-acted-on</rdfs:comment>
+    <rdfs:domain rdf:resource="#Generalized-Transfer"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Generic-Agent"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-research-interest">
+    <rdfs:range rdf:resource="#Research-Area"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Organization-Unit"/>
+          <owl:Class rdf:about="#Organization"/>
+          <owl:Class rdf:about="#Person"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >People and in general even organizations and organization units may have research interests.  This relation shoudl be used to specify them</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="requires-hardware-platform-on-client-side">
+    <rdfs:range rdf:resource="#Hardware-Platform"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Web-Based-System"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-capital">
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="is-capital-of"/>
+    </owl:inverseOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Capital-City"/>
+    <rdfs:domain rdf:resource="#Country"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#studies-in-unit">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subPropertyOf rdf:resource="#has-affiliation-to-unit"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#information-object-being-transferred">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Information-Bearing-Object"/>
+    <rdfs:domain rdf:resource="#Information-Transfer-Event"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-gender">
+    <rdfs:domain rdf:resource="#Person"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Gender"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#contains-article">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#contains-publication"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#contains-news-item">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#contains-publication"/>
+    </rdfs:subPropertyOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-affiliation">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Affiliated-Person"/>
+    <rdfs:range rdf:resource="#Organization"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-project-leader">
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#has-project-member"/>
+    </rdfs:subPropertyOf>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="contains-property">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="funding-source">
+    <rdfs:range rdf:resource="#Organization"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Project"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="requires-software-technology-on-server-side">
+    <rdfs:range rdf:resource="#Software-Technology"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Web-Based-System"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:ID="requires-software-technology"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#produces-output">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Activity"/>
+    <rdfs:range rdf:resource="http://www.aktors.org/ontology/support#Thing"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#organization-part-of">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-location">
+    <rdfs:domain rdf:resource="#Event"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The location at which an event takes place</rdfs:comment>
+    <rdfs:range rdf:resource="#Location"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#works-for">
+    <rdfs:subPropertyOf rdf:resource="#has-affiliation"/>
+    <rdfs:range rdf:resource="#Organization"/>
+    <rdfs:domain rdf:resource="#Employee"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#thing-acted-on">
+    <rdfs:domain rdf:resource="#Generalized-Transfer"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >What is being transferred</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="requires-software-technology-on-client-side">
+    <rdfs:range rdf:resource="#Software-Technology"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Web-Based-System"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-other-agents-involved">
+    <rdfs:range rdf:resource="#Generic-Agent"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Other agents involved in the event</rdfs:comment>
+    <rdfs:domain rdf:resource="#Event"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-place-of-publication">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-support-unit">
+    <rdfs:subPropertyOf rdf:resource="#has-sub-unit"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Academic-Support-Unit"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="subsidiary-of">
+    <rdfs:range rdf:resource="#Profit-Organization"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="person-being-visited">
+    <rdfs:domain rdf:resource="#Visiting-Researcher"/>
+    <rdfs:range rdf:resource="#Person"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="government-of-country">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Country"/>
+    <rdfs:domain rdf:resource="#Government"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#studies-at">
+    <rdfs:subPropertyOf rdf:resource="#has-affiliation"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="runs-on-operating-system-on-client-side">
+    <rdfs:range rdf:resource="#Operating-System"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Web-Based-System"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="information-being-transferred">
+    <rdfs:subPropertyOf rdf:resource="#thing-acted-on"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Abstract-Information"/>
+    <rdfs:domain rdf:resource="#Information-Transfer-Event"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sender-of-message">
+    <rdfs:domain rdf:resource="#Message"/>
+    <rdfs:range rdf:resource="#Generic-Agent"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#supports-language">
+    <rdfs:range rdf:resource="#Specification-Or-Computing-Language"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Programming-Environment"/>
+          <owl:Class rdf:about="#Editor"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sender-of-information">
+    <rdfs:range rdf:resource="#Generic-Agent"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Information-Transfer-Event"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#has-main-agent"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-status">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Software-Status"/>
+    <rdfs:domain rdf:resource="#Implemented-System"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Whether the software is released, alpha or beta</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#headed-by">
+    <rdfs:range rdf:resource="#Affiliated-Person"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="affiliated-people">
+    <rdfs:range rdf:resource="#Affiliated-Person"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-vice-chancellor">
+    <rdfs:range rdf:resource="#Educational-Employee"/>
+    <rdfs:domain rdf:resource="#University"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="sub-unit-of-organization-unit">
+    <rdfs:range rdf:resource="#Organization-Unit"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="meeting-organizer">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Person"/>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="#has-main-agent"/>
+    </rdfs:subPropertyOf>
+    <rdfs:domain rdf:resource="#Meeting-Taking-Place"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-faculty">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#University-Faculty"/>
+    <rdfs:domain rdf:resource="#University"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-periodicity">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="issued-by">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Currency"/>
+    <rdfs:range rdf:resource="#Government"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#involves-organization">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Organization"/>
+    <rdfs:domain rdf:resource="#Project"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#sub-area-of">
+    <rdfs:range rdf:resource="#Generic-Area-Of-Interest"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Generic-Area-Of-Interest"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-academic-unit">
+    <rdfs:subPropertyOf rdf:resource="#has-sub-unit"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Academic-Unit"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-speaker">
+    <rdfs:domain rdf:resource="#Giving-A-Talk"/>
+    <rdfs:subPropertyOf rdf:resource="#sender-of-information"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Person"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-postal-address">
+    <rdfs:range rdf:resource="#Postal-Address"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="runs-on-operating-system-on-server-side">
+    <rdfs:subPropertyOf rdf:resource="#runs-on-operating-system"/>
+    <rdfs:domain rdf:resource="#Web-Based-System"/>
+    <rdfs:range rdf:resource="#Operating-System"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-sub-activity">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Activity"/>
+    <rdfs:range rdf:resource="#Activity"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#contains-publication">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="address-region">
+    <rdfs:domain rdf:resource="#Address"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Geographical-Region"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#location-at-start">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subPropertyOf rdf:resource="#has-location"/>
+    <rdfs:range rdf:resource="#Location"/>
+    <rdfs:domain rdf:resource="#Event-Involving-Movement"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#event-product">
+    <rdfs:range rdf:resource="#Event-Involving-Production"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#location-at-end">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Event-Involving-Movement"/>
+    <rdfs:range rdf:resource="#Location"/>
+    <rdfs:subPropertyOf rdf:resource="#has-location"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-main-agent">
+    <rdfs:range rdf:resource="#Generic-Agent"/>
+    <rdfs:domain rdf:resource="#Event"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The agents causing the event to happen, if they are known.</rdfs:comment>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-author">
+    <rdfs:range rdf:resource="#Generic-Agent"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Information-Bearing-Object"/>
+          <owl:Class rdf:about="#Publication-Reference"/>
+          <owl:Class rdf:about="#Technology"/>
+          <owl:Class rdf:about="#Method"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-size">
+    <rdfs:range rdf:resource="#Organization-Size"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#affiliated-person">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="addresses-generic-area-of-interest">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Technology"/>
+          <owl:Class rdf:about="#Method"/>
+          <owl:Class rdf:about="#Project"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Generic-Area-Of-Interest"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#requires-software-technology">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Implemented-System"/>
+    <rdfs:range rdf:resource="#Software-Technology"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="recipient-of-message">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Message"/>
+    <rdfs:range rdf:resource="#Generic-Agent"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="works-in-unit">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Employee"/>
+    <rdfs:subPropertyOf rdf:resource="#has-affiliation-to-unit"/>
+    <rdfs:range rdf:resource="#Organization-Unit"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="uses-resource">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Activity"/>
+    <rdfs:range rdf:resource="http://www.aktors.org/ontology/support#Thing"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#owned-by">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:range rdf:resource="#Legal-Agent"/>
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Information-Bearing-Object"/>
+          <owl:Class rdf:about="#Technology"/>
+          <owl:Class rdf:about="#Method"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="has-leading-organization">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subPropertyOf rdf:resource="#involves-organization"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#has-project-member">
+    <rdfs:domain rdf:resource="#Project"/>
+    <rdfs:range rdf:resource="#Person"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="technology-builds-on">
+    <rdfs:range rdf:resource="#Technology"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Technology"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="organization-unit-being-visited">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Visiting-Researcher"/>
+    <rdfs:range rdf:resource="#Organization-Unit"/>
+    <rdfs:subPropertyOf rdf:resource="#has-affiliation-to-unit"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#is-capital-of">
+    <owl:inverseOf rdf:resource="#has-capital"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Capital-City"/>
+    <rdfs:range rdf:resource="#Country"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:ID="has-web-address">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >has web address</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="has-page-numbers">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="address-pretty-label">
+    <rdfs:domain rdf:resource="#Address"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.aktors.org/ontology/support#has-pretty-name"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="has-amount">
+    <rdfs:domain rdf:resource="#Amount-Of-Money"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.aktors.org/ontology/support#has-magnitude"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="has-job-title">
+    <rdfs:domain rdf:resource="#Employee"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="address-street">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Address"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="address-number">
+    <rdfs:domain rdf:resource="#Address"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="address-postcode">
+    <rdfs:domain rdf:resource="#Address"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="has-telephone-number">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="given-name">
+    <rdfs:domain rdf:resource="#Person"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="address-building">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Address"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="has-fax-number">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="has-URL">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#Web-Reference"/>
+          <owl:Class rdf:about="#Web-Site"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="has-email-address">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >has email address</rdfs:label>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="family-name">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:domain rdf:resource="#Person"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="has-award-rationale">
+    <rdfs:domain rdf:resource="#Conferring-An-Award"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="has-goals">
+    <rdfs:domain rdf:resource="#Project"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="full-name">
+    <rdfs:subPropertyOf rdf:resource="http://www.aktors.org/ontology/support#has-pretty-name"/>
+    <rdfs:domain rdf:resource="#Person"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:ID="has-title">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <rdfs:subPropertyOf rdf:resource="http://www.aktors.org/ontology/support#has-pretty-name"/>
+  </owl:DatatypeProperty>
+  <portal:Research-Area rdf:ID="Knowledge-Publishing">
+    <portal:sub-area-of>
+      <portal:Research-Area rdf:ID="Knowledge-Management">
+        <rdfs:isDefinedBy rdf:resource=""/>
+      </portal:Research-Area>
+    </portal:sub-area-of>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Research-Area>
+  <portal:Research-Area rdf:ID="Semantic-Web-Area">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <portal:sub-area-of>
+      <portal:Research-Area rdf:ID="Web-Research-Area">
+        <rdfs:isDefinedBy rdf:resource=""/>
+      </portal:Research-Area>
+    </portal:sub-area-of>
+  </portal:Research-Area>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/terms/created"/>
+  <portal:Academic-Degree rdf:ID="BSc">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Academic-Degree>
+  <portal:Software-Status rdf:ID="Released-Version">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Software-Status>
+  <portal:Research-Area rdf:ID="Incidental-KA">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <portal:sub-area-of>
+      <portal:Research-Area rdf:ID="Knowledge-Acquisition">
+        <portal:sub-area-of rdf:resource="#Knowledge-Management"/>
+        <rdfs:isDefinedBy rdf:resource=""/>
+      </portal:Research-Area>
+    </portal:sub-area-of>
+  </portal:Research-Area>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/description"/>
+  <portal:Research-Area rdf:ID="Adaptive-Hypermedia">
+    <portal:sub-area-of>
+      <portal:Research-Area rdf:ID="Hypermedia">
+        <rdfs:isDefinedBy rdf:resource=""/>
+      </portal:Research-Area>
+    </portal:sub-area-of>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Research-Area>
+  <portal:Appellation rdf:ID="Sir">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Appellation>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/creator"/>
+  <portal:Academic-Degree rdf:ID="PhD">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Academic-Degree>
+  <portal:Research-Area rdf:ID="Multimedia-Research-Area">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Research-Area>
+  <portal:Research-Area rdf:ID="Knowledge-Maintenance">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <portal:sub-area-of rdf:resource="#Knowledge-Management"/>
+  </portal:Research-Area>
+  <portal:Research-Area rdf:ID="Artificial-Intelligence-Research-Area">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Research-Area>
+  <portal:Software-Status rdf:ID="Beta-Version">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Software-Status>
+  <portal:Software-Status rdf:ID="Alpha-Version">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Software-Status>
+  <portal:Research-Area rdf:ID="Telepresence-Research-Area">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Research-Area>
+  <portal:Research-Area rdf:ID="Collaborative-Hypermedia">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <portal:sub-area-of rdf:resource="#Hypermedia"/>
+  </portal:Research-Area>
+  <portal:Research-Area rdf:ID="Organizational-Learning">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <portal:sub-area-of>
+      <portal:Research-Area rdf:ID="Learning-Research-Area">
+        <rdfs:isDefinedBy rdf:resource=""/>
+      </portal:Research-Area>
+    </portal:sub-area-of>
+  </portal:Research-Area>
+  <portal:Research-Area rdf:ID="Agent-Based-Computing">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Research-Area>
+  <portal:Research-Area rdf:ID="Cognitive-Modelling-Research-Area">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Research-Area>
+  <portal:Research-Area rdf:ID="Knowledge-Lifecycle">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <portal:sub-area-of rdf:resource="#Knowledge-Management"/>
+  </portal:Research-Area>
+  <portal:Research-Area rdf:ID="Information-Retrieval">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Research-Area>
+  <portal:Academic-Degree rdf:ID="DEng">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Academic-Degree>
+  <portal:Academic-Degree rdf:ID="MA">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Academic-Degree>
+  <portal:Appellation rdf:ID="Lady">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Appellation>
+  <portal:Software-Status rdf:ID="Broken-Version">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Software-Status>
+  <owl:AnnotationProperty rdf:about="http://purl.org/dc/elements/1.1/title"/>
+  <portal:Research-Area rdf:ID="Software-Visualization">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <portal:sub-area-of>
+      <portal:Research-Area rdf:ID="Human-Computer-Interaction">
+        <portal:sub-area-of>
+          <portal:Research-Area rdf:ID="Computing-Research-Area">
+            <rdfs:isDefinedBy rdf:resource=""/>
+          </portal:Research-Area>
+        </portal:sub-area-of>
+        <rdfs:isDefinedBy rdf:resource=""/>
+      </portal:Research-Area>
+    </portal:sub-area-of>
+  </portal:Research-Area>
+  <portal:Research-Area rdf:ID="E-Commerce-Research-Area">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Research-Area>
+  <portal:Academic-Degree rdf:ID="MSc">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Academic-Degree>
+  <portal:Research-Area rdf:ID="Ontologies">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <portal:sub-area-of>
+      <portal:Research-Area rdf:ID="Knowledge-Modelling">
+        <portal:sub-area-of rdf:resource="#Knowledge-Management"/>
+        <rdfs:isDefinedBy rdf:resource=""/>
+      </portal:Research-Area>
+    </portal:sub-area-of>
+  </portal:Research-Area>
+  <portal:Appellation rdf:ID="Dr">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Appellation>
+  <portal:Research-Area rdf:ID="Problem-Solving-Methods">
+    <portal:sub-area-of rdf:resource="#Knowledge-Modelling"/>
+    <portal:sub-area-of>
+      <portal:Research-Area rdf:ID="Knowledge-Reuse">
+        <portal:sub-area-of rdf:resource="#Knowledge-Management"/>
+        <rdfs:isDefinedBy rdf:resource=""/>
+      </portal:Research-Area>
+    </portal:sub-area-of>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Research-Area>
+  <portal:Software-Status rdf:ID="Experimental-Version">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Software-Status>
+  <portal:Appellation rdf:ID="Mrs">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Appellation>
+  <portal:Appellation rdf:ID="Prof">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Appellation>
+  <portal:Research-Area rdf:ID="Knowledge-Retrieval">
+    <portal:sub-area-of rdf:resource="#Knowledge-Management"/>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Research-Area>
+  <portal:Academic-Degree rdf:ID="BA">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Academic-Degree>
+  <portal:Research-Area rdf:ID="Dynamic-Linking">
+    <rdfs:isDefinedBy rdf:resource=""/>
+    <portal:sub-area-of rdf:resource="#Hypermedia"/>
+  </portal:Research-Area>
+  <portal:Appellation rdf:ID="Ms">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Appellation>
+  <portal:Appellation rdf:ID="Mr">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Appellation>
+  <portal:Research-Area rdf:ID="Information-Extraction">
+    <portal:sub-area-of>
+      <portal:Research-Area rdf:ID="Language-Engineering">
+        <rdfs:isDefinedBy rdf:resource=""/>
+      </portal:Research-Area>
+    </portal:sub-area-of>
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Research-Area>
+  <portal:Appellation rdf:ID="Miss">
+    <rdfs:isDefinedBy rdf:resource=""/>
+  </portal:Appellation>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.4.4, Build 579)  http://protege.stanford.edu -->

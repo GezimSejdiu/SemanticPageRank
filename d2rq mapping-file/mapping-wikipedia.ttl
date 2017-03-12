@@ -1,0 +1,100 @@
+#-- namespace configuration
+#-- path to the mapping file
+@prefix map: <file:.../d2rq-0.8.1/mapping-wikipedia.n3#> .
+@prefix vocab: <vocab/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix db: <> .
+@prefix wiki: <#> .
+@prefix SsOnto: <http://localhost/Institute#> .
+@prefix portal: <http://www.aktors.org/ontology/portal#> .
+@prefix jdbc: <http://d2rq.org/terms/jdbc/> .
+#-- namespace configuration
+
+#-- database connection parameters
+map:database a d2rq:Database;
+	d2rq:jdbcDriver "com.mysql.jdbc.Driver";
+	d2rq:jdbcDSN "jdbc:mysql://localhost/wikipedia?autoReconnect=true";
+	d2rq:username "root";
+	d2rq:password "root";
+	jdbc:keepAlive "3600";				# sends noop-query every 3600 seconds
+#	jdbc:keepAliveQuery "SELECT 1";		# optional custom noop-query
+	.
+#-- database connection parameters
+
+	# Table page
+map:Web-Site a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "http://localhost/Institute#Web-Site_@@page.page_id@@";
+	d2rq:class portal:Web-Site;
+	.
+map:page_title a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Web-Site;
+	d2rq:property portal:has-title;
+	d2rq:column "page.page_title";
+	.	
+map:page_random a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Web-Site;
+	d2rq:property wiki:has-page_random;
+	d2rq:column "page.page_random";
+	.
+map:hasOutLink a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Web-Site;
+    d2rq:property SsOnto:hasOutLink;
+    d2rq:refersToClassMap map:Web-SiteLinks;
+	d2rq:condition "pagelinks.pl_from != 0";
+	d2rq:join "pagelinks.pl_title_ = page.page_title_";
+	.
+map:hasOutLinkValue a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Web-SiteLinks;
+    d2rq:property wiki:hasOutLinkValue;
+    d2rq:refersToClassMap map:Web-Site;
+	d2rq:condition "pagelinks.pl_from != 0";
+	d2rq:join "pagelinks.pl_from=page.page_id";
+	.
+map:hasCategories a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Web-Site;
+    d2rq:property wiki:hasCategories;
+    d2rq:refersToClassMap map:CategoryLinks;
+	d2rq:join "categorylinks.cl_to_= page.page_title_";
+	.
+	# Table pagelinks
+map:Web-SiteLinks a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "http://localhost/Institute#Web-SiteLinks_@@pagelinks.pl_from@@";
+	d2rq:class wiki:Web-SiteLinks;
+	.
+	# Table category
+map:Categories a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "http://localhost/Institute#Category_@@category.cat_id@@";
+	d2rq:class wiki:Categories;
+	.
+map:cat_title a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Categories;
+	d2rq:property wiki:has-Cat_title;
+	d2rq:column "category.cat_title";
+	.
+map:hasCategoryLinks a d2rq:PropertyBridge;
+	d2rq:belongsToClassMap map:Categories;
+    d2rq:property wiki:hasCategoryLinks;
+    d2rq:refersToClassMap map:CategoryLinks;
+	d2rq:condition "categorylinks.cl_from != 0";
+	d2rq:join "categorylinks.cl_to_=category.cat_title_";
+	.
+	# Table categorylinks
+map:CategoryLinks a d2rq:ClassMap;
+	d2rq:dataStorage map:database;
+	d2rq:uriPattern "http://localhost/Institute#CategoryLinks_@@categorylinks.cl_from@@";
+	d2rq:class wiki:CategoryLinks;
+	.
+
+
+
