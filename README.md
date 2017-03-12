@@ -11,8 +11,8 @@ Furthermore, to calculate the PageRank values we defined several rules using Sem
 The preliminary evaluation of the proposed approach is conducted over a Wikipedia dump of pages.
 
 ## Structure
-### [OwlProject](https://github.com/gezims/SemanticPageRank/OwlProject)
+### [OwlProject](https://github.com/gezims/SemanticPageRank/tree/master/OwlProject)
 Contains the Semantic PageRank rules and their calculations.
 
-### [SemanticSearchWikiApp](https://github.com/gezims/SemanticPageRank/SemanticSearchWikiApp)
+### [SemanticSearchWikiApp](https://github.com/gezims/SemanticPageRank/tree/master/SemanticSearchWikiApp)
 Contains the Semantic Wiki Search over precomputed rank values.
